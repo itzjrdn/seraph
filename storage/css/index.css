@@ -29,8 +29,34 @@ body::-webkit-scrollbar {
     animation: mainHeaderAnimation 1s ease-in-out forwards;
     background-image: var(--background-image);
     background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+    min-height: 100vh;
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
 }
-  
+
+.content-side::before, .content-side::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.content-side::before {
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06), transparent 35%),
+                radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08), transparent 32%),
+                radial-gradient(circle at 50% 80%, rgba(255,255,255,0.05), transparent 30%);
+    mix-blend-mode: screen;
+}
+
+.content-side::after {
+    backdrop-filter: blur(2px);
+}
+
 h1 {
     font-size: 96px;
     font-family: var(--font-family);
@@ -38,15 +64,16 @@ h1 {
                  0 0 10px var(--text-glow),
                  0 0 30px var(--text-glow),
                  0 0 40px var(--text-color),
-                 0 0 50px var(--text-glow),
-                 0 0 60px var(--text-color),
-                 0 0 70px var(--text-glow),
-                 0 0 80px #000000;
-    margin-bottom: 0px;
+                  0 0 50px var(--text-glow),
+                  0 0 60px var(--text-color),
+                  0 0 70px var(--text-glow),
+                  0 0 80px #000000;
+    margin: 0 0 8px 0;
 }
   
 h2 {
     font-size: 20px;
+    margin: 0 0 12px 0;
 }
   
 p {
@@ -57,6 +84,41 @@ p {
     text-align: center;
     text-shadow: 5px 5px 5px var(--text-glow);
     animation: paragraphTween 1.2s ease-in-out forwards;
+}
+
+.hero-shell {
+    position: relative;
+    z-index: 1;
+    width: min(1100px, 96vw);
+    padding: 48px 56px;
+    border-radius: 24px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 0 25px rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.hero-header {
+    text-align: center;
+}
+
+.hero-header h2 {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.tagline {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 640px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.5px;
 }
   
 .linkp a {
@@ -83,30 +145,34 @@ a {
 .gamesbutton {
     background-color: var(--background-color);
     color: var(--text-color);
-    width: 50%;
-    max-width: 100px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: 160px;
+    max-width: 200px;
+    padding-top: 18px;
+    padding-bottom: 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    height: 85px;
+    font-size: 15px;
+    height: 140px;
     margin: 0 10px;
     padding-left: 20px;
     padding-right: 20px;
     
-    transition: background-color 0.15s ease-in-out;
-    border: 3px solid var(--border-color2);
-    border-radius: 16px;
+    transition: background-color 0.15s ease-in-out, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 18px;
     position: relative;
+    background: linear-gradient(140deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
 }
   
 .gamesbutton img {
-    width: calc(100% - 24px);
+    width: 72px;
     height: auto;
     display: block;
     margin: 0 auto;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.45));
 }
 
 .gamesbutton-link {
@@ -118,19 +184,52 @@ a {
 .gamesbutton:hover {
     background-color: var(--hover-color); 
     transition: background-color 0.1s ease-in-out; 
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 32px rgba(255, 255, 255, 0.12);
+    border-color: rgba(255,255,255,0.28);
 }
   
 .button-text {
     position: absolute;
-    bottom: 10px;
+    bottom: 14px;
     left: 0;
     right: 0;
     text-align: center; 
 }
 
+.button-text p {
+    margin: 0;
+    font-size: 17px;
+    letter-spacing: 0.6px;
+}
+
 .button-container {
     display: flex;
     text-align: center; 
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    width: 100%;
+}
+
+.meta-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 6px;
+}
+
+.credit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    font-size: 15px;
+    letter-spacing: 0.4px;
 }
   
   

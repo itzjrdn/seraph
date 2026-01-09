@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -13,6 +12,7 @@
 
   <title>Getting Over It | Seraph</title>
   <link rel="shortcut icon" href="../../images/ico.ico">
+  <link rel="canonical" href="https://www.crazygames.com/game/getting-over-it">
   <style>
     body {
       background-color: black;
@@ -20,6 +20,11 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
+    }
+    #container {
+      width: 100%;
+      height: 100vh;
+      position: relative;
     }
     iframe {
       position: absolute;
@@ -29,12 +34,91 @@
       height: 100%;
       border: none;
     }
+    #progress {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 80px;
+      margin-top: -40px;
+      margin-left: -250px;
+      text-align: center;
+    }
+    #progress-box {
+      background: rgba(255,255,255,0.1);
+      justify-content: flex-start;
+      border: 2px solid #fff;
+      align-items: center;
+      position: relative;
+      padding: 0px 5px;
+      display: flex;
+      height: 30px;
+      width: 487px;
+      margin: 0 auto;
+    }
+    #progress-bar {
+      display: block;
+      box-shadow: 0 10px 30px -10px #fff;
+      background: #fff;
+      height: 20px;
+      width: 0%;
+    }
+    #loading-text {
+      font-family: sans-serif;
+      letter-spacing: 0.5px;
+      margin-top: 12px;
+      color: #dcdcdc;
+      font-size: 14px;
+    }
   </style>
+  <script src="https://sdk.crazygames.com/crazygames-sdk-v2.js"></script>
   <script src="../../storage/js/cloak.js"></script>
 </head>
 
 <body>
-      <iframe src="https://turbowarp.org/389464290/embed" allowtransparency="true" allowfullscreen></iframe>
+  <div id="container">
+    <div id="progress">
+      <img src="https://files.crazygames.com/favicons/apple-touch-icon.png" width="72" height="72" alt="CrazyGames logo">
+      <div id="progress-box">
+        <div id="progress-bar"></div>
+      </div>
+      <div id="loading-text">Loading CrazyGames…</div>
+    </div>
+    <iframe id="game-frame" src="about:blank" allow="gamepad *; autoplay *; fullscreen *; encrypted-media *" allowfullscreen></iframe>
+  </div>
+  <script>
+    (function() {
+      var bar = document.getElementById("progress-bar");
+      var container = document.getElementById("container");
+      var frame = document.getElementById("game-frame");
+      var progress = document.getElementById("progress");
+      var maxPercentage = 90;
+      var delay = 400;
+
+      function barUpdater() {
+        var percentage = parseInt(bar.style.width || "0", 10);
+        if (percentage < maxPercentage) {
+          percentage++;
+          bar.style.width = percentage + "%";
+          delay += 12;
+          setTimeout(barUpdater, delay);
+        }
+      }
+      setTimeout(barUpdater, delay);
+
+      frame.addEventListener("load", function() {
+        bar.style.width = "100%";
+        setTimeout(function() {
+          progress.style.display = "none";
+          container.style.background = "black";
+        }, 200);
+      });
+
+      frame.src = "https://www.crazygames.com/embed/getting-over-it";
+    })();
+  </script>
 </body>
 
 </html>
+
