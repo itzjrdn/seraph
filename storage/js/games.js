@@ -226,7 +226,7 @@ const OFFLINE_MODE = [
     // offline mode page files
     '/offline.html',
     '/images/backgrounds/seraph/offlinebg.jpg',
-    '/images/ico.ico',
+    '/images/Dex.png',
     '/storage/fonts/ubuntu/Ubuntu.woff2',
     '/storage/js/directories.json',
 

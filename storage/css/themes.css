@@ -51,12 +51,12 @@
     --background-image: none;
     --font-family: 'Ubuntu', sans-serif;
     --text-color: #fff;
-    --background-color: #0a0a1a;
+    --background-color: #050a15;
     --border-color1: #000000;
     --border-color2: #ffffff;
     --hover-color: #1a1818;
-    --text-glow: #4f46e5;
-    --animated-bg: linear-gradient(-45deg, #0a0a1a, #1a1a3e, #0f2027, #0a0a1a, #1e1e4a);
+    --text-glow: #00d4ff;
+    --animated-bg: linear-gradient(-45deg, #000814, #001d3d, #003566, #001d3d, #000814);
 }
 
 :root.theme-azurite {
@@ -186,27 +186,97 @@
     z-index: -1;
     background: var(--animated-bg);
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: gradientShift 4s ease infinite;
+    overflow: hidden;
 }
 
 .animated-bg::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -50%;
     background: 
-        radial-gradient(ellipse at 20% 80%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse at 40% 40%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
-    animation: floatingOrbs 20s ease-in-out infinite;
+        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.4) 0%, transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(0, 180, 255, 0.35) 0%, transparent 35%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 30%),
+        radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.3) 0%, transparent 25%),
+        radial-gradient(circle at 70% 70%, rgba(100, 200, 255, 0.25) 0%, transparent 30%);
+    animation: floatingOrbs 6s ease-in-out infinite;
 }
 
 .animated-bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: starField 60s linear infinite;
+    background-image: 
+        radial-gradient(circle, rgba(0, 212, 255, 0.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.6) 1px, transparent 1px);
+    background-size: 80px 80px, 40px 40px;
+    background-position: 0 0, 20px 20px;
+    animation: starField 8s linear infinite;
+}
+
+/* Lightning bolts */
+.lightning {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.lightning::before,
+.lightning::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 212, 255, 0) 20%,
+        rgba(0, 212, 255, 0.9) 21%,
+        rgba(150, 230, 255, 1) 22%,
+        rgba(0, 212, 255, 0.9) 23%,
+        rgba(0, 212, 255, 0) 35%,
+        transparent 36%,
+        transparent 50%,
+        rgba(0, 212, 255, 0) 65%,
+        rgba(0, 212, 255, 0.8) 66%,
+        rgba(200, 240, 255, 1) 67%,
+        rgba(0, 212, 255, 0.8) 68%,
+        rgba(0, 212, 255, 0) 80%,
+        transparent 100%
+    );
+    filter: blur(1px);
+    opacity: 0;
+    box-shadow: 
+        0 0 10px rgba(0, 212, 255, 0.8),
+        0 0 20px rgba(0, 212, 255, 0.6),
+        0 0 40px rgba(0, 212, 255, 0.4),
+        0 0 80px rgba(100, 200, 255, 0.3);
+}
+
+.lightning::before {
+    left: 20%;
+    animation: lightning1 4s ease-in-out infinite;
+    transform: skewX(-5deg);
+}
+
+.lightning::after {
+    left: 75%;
+    animation: lightning2 5s ease-in-out infinite;
+    animation-delay: 2s;
+    transform: skewX(8deg);
+}
+
+@keyframes lightning1 {
+    0%, 89%, 91%, 93%, 100% { opacity: 0; }
+    90%, 92% { opacity: 1; }
+}
+
+@keyframes lightning2 {
+    0%, 84%, 86%, 88%, 90%, 100% { opacity: 0; }
+    85%, 87%, 89% { opacity: 0.8; }
 }
 
 @keyframes gradientShift {
@@ -216,13 +286,13 @@
 }
 
 @keyframes floatingOrbs {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(2%, -2%) scale(1.02); }
-    50% { transform: translate(-1%, 1%) scale(0.98); }
-    75% { transform: translate(1%, 2%) scale(1.01); }
+    0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    25% { transform: translate(3%, -3%) rotate(2deg) scale(1.05); }
+    50% { transform: translate(-2%, 2%) rotate(-1deg) scale(0.98); }
+    75% { transform: translate(2%, 3%) rotate(1deg) scale(1.03); }
 }
 
 @keyframes starField {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50px); }
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-80px) translateX(-40px); }
 }
