@@ -1,17 +1,22 @@
 @import url('/storage/css/themes.css');
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: var(--font-family);
     display: flex;
     background-color: var(--background-color); 
-    animation: mainHeaderAnimation 2s forwards;
     
     scrollbar-width: none;
     -ms-overflow-style: none;
 
-    height: 100%;
+    min-height: 100vh;
+    opacity: 0;
+    animation: fadeSlideIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
   
 body::-webkit-scrollbar {
@@ -26,13 +31,12 @@ body::-webkit-scrollbar {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: mainHeaderAnimation 1s ease-in-out forwards;
     background-image: var(--background-image);
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
     min-height: 100vh;
-    padding: 80px 24px;
+    padding: 60px 24px;
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -58,48 +62,54 @@ body::-webkit-scrollbar {
 }
 
 h1 {
-    font-size: 96px;
+    font-size: clamp(60px, 12vw, 96px);
     font-family: var(--font-family);
-    text-shadow: 0 0 10px var(--text-color),
-                 0 0 10px var(--text-glow),
-                 0 0 30px var(--text-glow),
-                 0 0 40px var(--text-color),
-                  0 0 50px var(--text-glow),
-                  0 0 60px var(--text-color),
-                  0 0 70px var(--text-glow),
-                  0 0 80px #000000;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 
+        0 0 20px var(--text-glow),
+        0 0 40px var(--text-glow),
+        0 4px 30px rgba(0,0,0,0.5);
     margin: 0 0 8px 0;
+    animation: glowPulse 3s ease-in-out infinite alternate;
 }
   
 h2 {
-    font-size: 20px;
-    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0 0 16px 0;
+    opacity: 0.9;
 }
   
 p {
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 2px;
     padding-left: 10%;
     padding-right: 10%;
     text-align: center;
-    text-shadow: 5px 5px 5px var(--text-glow);
-    animation: paragraphTween 1.2s ease-in-out forwards;
+    line-height: 1.6;
 }
 
 .hero-shell {
     position: relative;
     z-index: 1;
-    width: min(1100px, 96vw);
-    padding: 48px 56px;
-    border-radius: 24px;
-    background: rgba(0, 0, 0, 0.45);
+    width: min(1000px, 94vw);
+    padding: 48px 48px 40px;
+    border-radius: 28px;
+    background: rgba(10, 10, 20, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55), 0 0 25px rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(14px);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.55), 
+        0 0 40px rgba(255, 255, 255, 0.06),
+        inset 0 0 60px rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
 }
 
 .hero-header {
@@ -110,69 +120,68 @@ p {
     letter-spacing: 4px;
     text-transform: uppercase;
     margin-bottom: 12px;
+    opacity: 0.85;
 }
 
 .tagline {
     padding-left: 0;
     padding-right: 0;
-    max-width: 640px;
+    max-width: 600px;
     margin: 0 auto;
     color: rgba(255,255,255,0.85);
     letter-spacing: 0.5px;
+    font-size: 16px;
 }
   
 .linkp a {
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
-    border: 3px solid transparent;
-    transition: 0.15s ease-in-out;
-    text-shadow: 5px 5px 5px var(--text-glow);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
   
 .linkp a:hover {
-    color: rgb(199, 192, 192);
+    background: rgba(255,255,255,0.1);
 }
   
 a {
     margin-top: 15px;
     font-size: 18px;
-    text-decoration: underline;
+    text-decoration: none;
     color: var(--text-color);
-    
-    text-shadow: 5px 5px 5px var(--text-glow);
 }
   
 .gamesbutton {
-    background-color: var(--background-color);
     color: var(--text-color);
     width: 160px;
     max-width: 200px;
-    padding-top: 18px;
-    padding-bottom: 16px;
+    padding: 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
-    height: 140px;
-    margin: 0 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    height: 150px;
+    margin: 0 12px;
     
-    transition: background-color 0.15s ease-in-out, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 18px;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 22px;
     position: relative;
-    background: linear-gradient(140deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 24px rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(6px);
+    background: rgba(15, 15, 25, 0.6);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
   
 .gamesbutton img {
-    width: 72px;
+    width: 68px;
     height: auto;
     display: block;
     margin: 0 auto;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.45));
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+    transition: transform 0.35s ease;
 }
 
 .gamesbutton-link {
@@ -182,16 +191,18 @@ a {
 }
 
 .gamesbutton:hover {
-    background-color: var(--hover-color); 
-    transition: background-color 0.1s ease-in-out; 
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 32px rgba(255, 255, 255, 0.12);
-    border-color: rgba(255,255,255,0.28);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255,255,255,0.25);
+}
+
+.gamesbutton:hover img {
+    transform: scale(1.08);
 }
   
 .button-text {
     position: absolute;
-    bottom: 14px;
+    bottom: 16px;
     left: 0;
     right: 0;
     text-align: center; 
@@ -199,15 +210,16 @@ a {
 
 .button-text p {
     margin: 0;
-    font-size: 17px;
-    letter-spacing: 0.6px;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
 .button-container {
     display: flex;
     text-align: center; 
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 20px;
     justify-content: center;
     width: 100%;
 }
@@ -216,33 +228,36 @@ a {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 6px;
+    margin-top: 8px;
 }
 
 .credit-pill {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 16px;
+    padding: 10px 18px;
     border-radius: 999px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
-    font-size: 15px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    font-size: 14px;
     letter-spacing: 0.4px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
   
   
 .cursor {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
     background-color: var(--text-color);
     border-radius: 50%;
-    position: absolute;
+    position: fixed;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.9;
     z-index: 10000;
+    box-shadow: 0 0 10px var(--text-color), 0 0 20px var(--text-glow);
 }
 
 #blackout {
@@ -252,7 +267,9 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
 }
 
@@ -262,81 +279,137 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 480px;
-    max-width: 60%;
-    max-height: 80%;
-    padding: 30px;
-    background-color: var(--background-color);
+    width: 500px;
+    max-width: 90%;
+    max-height: 85%;
+    padding: 32px;
+    background: rgba(15, 15, 25, 0.9);
     color: var(--text-color);
-    border: 3px solid var(--border-color2);
-    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
     z-index: 1001;
     text-align: center;
     flex-direction: column;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    animation: modalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 #updPopup h2 {
     margin-top: 0;
+    font-size: 24px;
+    letter-spacing: 1px;
 }
 
 #updConfirm {
     margin-top: 20px;
-    padding: 15px 24px;
-    background-color: var(--background-color);
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.08);
     color: var(--text-color);
-    border: 3px solid var(--border-color2);
-    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
     font-family: var(--font-family);
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 #updConfirm:hover {
-    background-color: var(--hover-color); 
-    transition: background-color 0.1s ease-in-out; 
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 #updContent {
-    border: 2px solid var(--border-color2);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 16px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 16px 20px;
     text-align: center;
+    background: rgba(255,255,255,0.03);
 
     overflow: auto;
     overflow-y: scroll;
 
-    max-height: 200px;
+    max-height: 220px;
 }
 
 #updContent ul {
     list-style-position: inside;
     text-align: left;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 #updConfirmFrame {
     z-index: 1002;
     width: 100%;
 }
-  
-@keyframes mainHeaderAnimation {
+
+/* Animations */
+@keyframes fadeSlideIn {
     0% {
         opacity: 0;
-        transform: translateY(-25%);
+        transform: translateY(20px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0%);
+        transform: translateY(0);
     }
 }
-  
-@keyframes paragraphTween {
+
+@keyframes glowPulse {
     0% {
-        transform: translateX(-4%);
+        text-shadow: 
+            0 0 20px var(--text-glow),
+            0 0 40px var(--text-glow),
+            0 4px 20px rgba(0,0,0,0.5);
     }
     100% {
-        transform: translateX(0%);
+        text-shadow: 
+            0 0 30px var(--text-glow),
+            0 0 60px var(--text-glow),
+            0 4px 30px rgba(0,0,0,0.6);
     }
 }
-  
-  
+
+@keyframes modalIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content-side {
+        padding: 40px 16px;
+    }
+    
+    .hero-shell {
+        padding: 36px 24px 32px;
+    }
+    
+    h1 {
+        font-size: 48px;
+    }
+    
+    .gamesbutton {
+        width: 140px;
+        height: 130px;
+        margin: 0 8px;
+    }
+    
+    .gamesbutton img {
+        width: 56px;
+    }
+    
+    .button-text p {
+        font-size: 14px;
+    }
+}
