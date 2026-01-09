@@ -48,14 +48,15 @@
 
 
 :root {
-    --background-image: url('/images/backgrounds/seraph/homebg.jpg');
+    --background-image: none;
     --font-family: 'Ubuntu', sans-serif;
     --text-color: #fff;
-    --background-color: black;
+    --background-color: #0a0a1a;
     --border-color1: #000000;
     --border-color2: #ffffff;
     --hover-color: #1a1818;
-    --text-glow: #000000
+    --text-glow: #4f46e5;
+    --animated-bg: linear-gradient(-45deg, #0a0a1a, #1a1a3e, #0f2027, #0a0a1a, #1e1e4a);
 }
 
 :root.theme-azurite {
@@ -67,6 +68,7 @@
     --background-color: #495092;
     --hover-color: #373e7d;
     --text-glow: #4e5bd0;
+    --animated-bg: none;
 }
 
 :root.theme-retro {
@@ -78,6 +80,7 @@
     --background-color: #2f8154;
     --hover-color: #258a79;
     --text-glow: #4ed089;
+    --animated-bg: none;
 }
 
 :root.theme-cosmic {
@@ -89,6 +92,7 @@
     --background-color: #121212;
     --hover-color: #181a1a;
     --text-glow: #d6c9c9;
+    --animated-bg: none;
 }
 
 :root.theme-molten {
@@ -100,6 +104,7 @@
     --background-color: #892525;
     --hover-color: #9b2121;
     --text-glow: #dc1010;
+    --animated-bg: none;
 }
 
 :root.theme-amethyst {
@@ -111,6 +116,7 @@
     --background-color: #502589;
     --hover-color: #5f24ae;
     --text-glow: #662589;
+    --animated-bg: none;
 }
 
 :root.theme-ethereal {
@@ -122,6 +128,7 @@
     --background-color: #258969;
     --hover-color: #219b48;
     --text-glow: #6c957b;
+    --animated-bg: none;
 }
 
 :root.theme-misinformation {
@@ -132,7 +139,8 @@
     --border-color1: #ff0000;
     --border-color2: #00ff0d;
     --hover-color: rgb(220, 78, 78);
-    --text-glow: #000000
+    --text-glow: #000000;
+    --animated-bg: none;
 }
 
 :root.theme-subzero {
@@ -144,6 +152,7 @@
     --background-color: rgb(0, 4, 78);
     --hover-color: rgb(10, 15, 112);
     --text-glow: rgb(34, 13, 110);
+    --animated-bg: none;
 }
 
 :root.theme-metro {
@@ -155,6 +164,7 @@
     --background-color: rgb(134, 71, 19);
     --hover-color: rgb(159, 85, 24);
     --text-glow: rgb(110, 84, 13);
+    --animated-bg: none;
 }
 
 :root.theme-ghostly {
@@ -166,4 +176,53 @@
     --background-color: rgb(29, 29, 29);
     --hover-color: rgb(40, 37, 37);
     --text-glow: rgb(167, 165, 165);
+    --animated-bg: none;
+}
+
+/* Animated Background for default dex theme */
+.animated-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--animated-bg);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+.animated-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 20% 80%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 40% 40%, rgba(129, 140, 248, 0.08) 0%, transparent 40%);
+    animation: floatingOrbs 20s ease-in-out infinite;
+}
+
+.animated-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: starField 60s linear infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes floatingOrbs {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(2%, -2%) scale(1.02); }
+    50% { transform: translate(-1%, 1%) scale(0.98); }
+    75% { transform: translate(1%, 2%) scale(1.01); }
+}
+
+@keyframes starField {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50px); }
 }

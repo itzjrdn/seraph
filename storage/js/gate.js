@@ -3,7 +3,7 @@
 
 (function() {
     const CORRECT_PASSWORD = 'Dufala';
-    const COOKIE_NAME = 'seraph_access';
+    const COOKIE_NAME = 'dex_access';
     const COOKIE_DAYS = 365; // Cookie lasts 1 year
 
     // Check if access cookie exists
@@ -144,7 +144,7 @@
                 }
             </style>
             <div class="gate-container">
-                <h1 class="gate-title">seraph</h1>
+                <h1 class="gate-title">dex</h1>
                 <p class="gate-subtitle">enter password to continue</p>
                 <input type="password" class="gate-input" id="gate-password" placeholder="password" autocomplete="off">
                 <button class="gate-button" id="gate-submit">enter</button>
