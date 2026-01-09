@@ -142,42 +142,40 @@
 
       
       <div class="content-side">
-          <h1 class="typewriter"><span id="cursor"></span></h1>
-          <h2>version 10 / release build</h2>
-          <br>
-
-          <div class="button-container">
-              <div class="gamesbutton" onclick="window.location='games/index.html';">
-                  <img src="images/other/controller.png">
-                  <div class="button-text">
-                      <p>games</p>
-                  </div>
-              </div>
-          
-              <div class="gamesbutton" onclick="window.location='apps/index.html';">
-                  <a href="apps/index.html"><img src="images/other/apps.png"></a>
-                  <div class="button-text">
-                      <p>apps</p>
-                  </div>
-              </div>
-
-              <div class="gamesbutton" onclick="window.location='settings.html';">
-                <a href="settings.html"><img src="images/other/settings.png"></a>
-                <div class="button-text">
-                    <p>settings</p>
-                </div>
+        <div class="hero-shell">
+            <div class="hero-header">
+              <h1 class="typewriter"><span id="cursor"></span></h1>
+              <h2>version 10 / release build</h2>
+              <p class="tagline">A sharper home for arcade classics, slick apps and all-new offline power.</p>
             </div>
-          </div>
-          
 
-          <br>
+            <div class="button-container">
+                <div class="gamesbutton" onclick="window.location='games/index.html';">
+                    <img src="images/other/controller.png">
+                    <div class="button-text">
+                        <p>games</p>
+                    </div>
+                </div>
+            
+                <div class="gamesbutton" onclick="window.location='apps/index.html';">
+                    <a href="apps/index.html"><img src="images/other/apps.png"></a>
+                    <div class="button-text">
+                        <p>apps</p>
+                    </div>
+                </div>
 
-          <p class="linkp"><a href="/seraphim/index.html">mobile</a> • <a href="host.html">rehost</a> • <a id="openBlankLink">open blank</a></p>
-          <p class="linkp"><a href="https://discord.gg/ZyZDmx3zuQ" target="_blank">discord</a> • <a href="updatelog.html">update log</a> • <a href="https://github.com/a456pur/seraph" target="_blank">source code</a> </p>
-          
-          <br>
-          <a href="https://github.com/a456pur" target="_blank" style="text-decoration: none;">˗ˏˋ❀ website created/developed by @a456pur ❀ ´ˎ˗</a>
-        
+                <div class="gamesbutton" onclick="window.location='settings.html';">
+                  <a href="settings.html"><img src="images/other/settings.png"></a>
+                  <div class="button-text">
+                      <p>settings</p>
+                  </div>
+              </div>
+            </div>
+
+            <div class="meta-row">
+              <span class="credit-pill">Website Produced by J**n *a****d</span>
+            </div>
+        </div>
       </div>
 
       <script>
@@ -238,6 +236,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var openBlankLink = document.getElementById('openBlankLink');
+            if (!openBlankLink) {
+                return;
+            }
         
             openBlankLink.addEventListener('click', function(event) {
                 event.preventDefault();
