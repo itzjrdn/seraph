@@ -9,7 +9,7 @@ if (!window.fetch || !indexedDB) {
 var fsBundleDirs, fsBundleFiles, loadStatus, romName, isPaused, wasmReady, bundleReady, biosReady, romMode, core, wIdb, romUploadCallback, latestVersion, mainCompleted, currentManager, romUploadsReady, realRomExt, currentTheme;
 var bundleCdn = "./";
 var bundleCdnLatest = "./";
-var biosCdn = "./BIOS/";
+var biosCdn = "./bios/";
 var infoJsonUrl = "./assets/info.json";
 var standaloneDownloadUrl = "./utils/webretro-standalone.html";
 var relativeBase = (typeof relativeBase == "string") ? relativeBase : "";
